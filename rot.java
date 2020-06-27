@@ -18,6 +18,7 @@ public static String encodeRot(int shift, String data){
             System.out.println("shift out of range");
         }
 
+	//convert the char's to ints e.g a = 1, b = 2 etc
         for (char c : dataCharArr) {
             for (int i = 0; i < alphabet.length; i++) {
                 if(c == alphabet[i]){
@@ -25,11 +26,12 @@ public static String encodeRot(int shift, String data){
                 }
             }
         }
-
+//compute the shift by adding the shift value to each element of the data int array list. 0 or (a) + shift (1) = encoded int. 
+//shift = 0 A - > A ; shift = 1 A -> B (0 + 1) . The mod 26 means any number > 26 wraps around back to 0
         for (Integer integer : dataIntArrLst) {
             encodedDataIntArrLst.add((integer + shift)%26);
         }
-
+//constructs the new encoded string 
         for (Integer integer : encodedDataIntArrLst) {
             for (int i = 0; i < alphabet.length; i++) {
                 if(integer == i){
@@ -56,7 +58,9 @@ public static String encodeRot(int shift, String data){
                 }
             }
         }
+	     //Here we decode the encoded Int Array by subtracting the shift instead. We check for negative values and subtract there magnitute from 26 to find the correct char
         for (Integer integer : encodedDataIntArrLst) {
+		
             if((integer - shift)<0){
                 dataIntArrLst.add((26 + (integer - shift)));
             }else {
